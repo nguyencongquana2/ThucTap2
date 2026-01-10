@@ -1,64 +1,43 @@
 package thuctap2.model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.Objects;
 
 public abstract class Employee {
     private static int cnt = 1;
-         private String id, name, gender, adress;
-         private LocalDate birthDate;
+    protected String id, name, gender, address;
+    protected LocalDate birthDate;
 
-         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public Employee(String name, String gender, LocalDate birthDate, String address) {
+        this.id = String.format("NV%03d", cnt++);
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.birthDate = birthDate;
+    }
 
-         public Employee(String name, String gender, LocalDate birthDate, String address) {
-             this.id = String.format("NV%02d", cnt++);
-             this.name = name;
-             this.gender = gender;
-             this.adress = address;
-             this.birthDate = birthDate;
-         }
-
-         public String getId() {
+    public String getId() {
              return id;
-         }
+    }
 
-         public String getName() {
-             return name;
-         }
+    public int getAge(){
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
 
-         public void setName(String name) {
-             this.name = name;
-         }
+    public abstract double getIncome();
 
-         public String getGender() {
-             return gender;
-         }
+    public abstract String getType();
 
-         public void setGender(String gender) {
-             this.gender = gender;
-         }
+    public abstract String toFileString();
 
-         public String getAdress() {
-             return adress;
-         }
-
-         public void setAdress(String adress) {
-             this.adress = adress;
-         }
-
-        public int getAge(){
-             LocalDate currentDate = LocalDate.now();
-             return currentDate.getYear() - birthDate.getYear();
-        }
-
-         public abstract double getSalary();
-
-         public abstract String getType();
-
-         public String getInfo(){
-             return id +" "+ name +" "+ gender + " "+ adress +" "+ birthDate.format(dtf);
-         }
+    @Override
+    public String toString() {
+        return String.format(
+                "%s | %s | %s | %s | %d tuổi | %.0f",
+                id, name, gender, getType(), getAge(), getIncome()
+        );
+    }
 
     @Override
     public boolean equals(Object o) {
