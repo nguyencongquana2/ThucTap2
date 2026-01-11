@@ -24,6 +24,9 @@ public abstract class Employee {
     public int getAge(){
         return Period.between(birthDate, LocalDate.now()).getYears();
     }
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
     public abstract double getIncome();
 

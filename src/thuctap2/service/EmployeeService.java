@@ -1,9 +1,11 @@
 package thuctap2.service;
 
+import thuctap2.exception.InvalidEmployeeException;
 import thuctap2.model.Employee;
 import thuctap2.repository.FileEmployeeRepository;
 import thuctap2.repository.IEmployeeRepository;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +36,12 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void addEmployee(Employee e) {
-        if(e.getIncome() <=0 ) {
-            throw new RuntimeException("Lương không hợp lệ");
+        if (e.getBirthDate().isAfter(LocalDate.now())) {
+            throw new InvalidEmployeeException("Ngày sinh không được lớn hơn hiện tại");
+        }
+
+        if (e.getIncome() <= 0) {
+            throw new InvalidEmployeeException("Thu nhập phải > 0");
         }
         repo.save(e);
     }

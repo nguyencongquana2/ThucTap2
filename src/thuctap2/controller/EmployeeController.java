@@ -127,9 +127,11 @@ public class EmployeeController {
             e = new TechEmployee(name, gender, birthDate, address, base, ot);
         }
 
-        if (e != null) {
+        try{
             service.addEmployee(e);
-            System.out.println("Thêm nhân viên thành công!");
+            System.out.println("Thêm thành công!");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }
