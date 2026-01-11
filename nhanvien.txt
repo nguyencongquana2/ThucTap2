@@ -1,0 +1,5 @@
+KT;Nguyen Van A;Nam;20/05/2001;Ha Noi;8000000;15
+HC;Tran Thi B;Nu;10/10/2000;Hai Phong;350000;22
+KT;Le Van C;Nam;12/08/1999;Da Nang;9000000;10
+HC;Pham Thi D;Nu;01/01/2002;Ha Noi;400000;20
+HC;Pham Thi D;Nu;01/01/2002;Ha Noi;400000;20
